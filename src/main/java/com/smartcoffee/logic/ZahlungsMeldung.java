@@ -7,9 +7,9 @@ package com.smartcoffee.logic;
 public enum ZahlungsMeldung
 {
 
-    ERFOLGREICH("Zahlvorgang erfolgreich"),
-    ERFOLGREICH_WECHSELGELD("Zahlvorgang erfolgreich, bitte Wechselgeld entnehmen"),
-    FEHLER_KEIN_WECHSELGELD("Zahlvorgang fehlgeschlagen, kein Wechselgeld vorhanden");
+    ERFOLGREICH("Zahlvorgang erfolgreich."),
+    ERFOLGREICH_WECHSELGELD("Zahlvorgang erfolgreich entnehmen Sie das Wechselgeld."),
+    FEHLER_KEIN_WECHSELGELD("Wechseln ist nicht möglich. Entnehmen Sie Ihre Münzen.");
 
     /** The descriptive system text corresponding to the payment status. */
     private final String text;

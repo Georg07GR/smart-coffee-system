@@ -9,11 +9,11 @@ import java.util.List;
  *
  * @param erfolgreich        true if exact change could be successfully calculated and provisioned; false otherwise
  * @param ausgegebeneMuenzen the list of specific {@link Muenze} constants to return to the user as change
- * @param Meldung            the specific {@link ZahlungsMeldung} status describing the payment outcome
+ * @param meldung            the specific {@link ZahlungsMeldung} status describing the payment outcome
  */
 public record WechselgeldErgebnis(
         boolean erfolgreich,
         List<Muenze> ausgegebeneMuenzen,
-        ZahlungsMeldung Meldung)
+        ZahlungsMeldung meldung)
 {
 }
