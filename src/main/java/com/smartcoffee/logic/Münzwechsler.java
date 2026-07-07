@@ -117,4 +117,10 @@ public class Münzwechsler
             }
         }
     }
+
+    //Helper Method
+    public void setMuenzenBestand(Muenze coin, int count)
+    {
+        this.muenzenBestand.put(coin, count);
+    }
 }
