@@ -1,7 +1,13 @@
 package com.smartcoffee.logic;
 
+/**
+ * Represents the types of coins accepted by the coffee machine's payment system.
+ * All monetary values are maintained strictly as integers in cents to eliminate
+ * floating-point calculation errors during transactions.
+ */
 public enum Muenze
 {
+
     CENT_1 (1, "1 Ct"),
     CENT_2 (2, "2 Ct"),
     CENT_5 (5, "5 Ct"),
@@ -11,22 +17,38 @@ public enum Muenze
     EURO_1 (100, "1 €"),
     EURO_2 (200, "2 €");
 
-
+    /** The monetary value represented strictly in cents. */
     private final int wertInCents;
+    /** The user-friendly text representation displayed on the UI. */
     private final String anzeigeName;
 
-
+    /**
+     * Constructs a coin constant with its designated cent value and display name.
+     *
+     * @param wertInCents the integer value of the coin in cents
+     * @param anzeigeName the formatted display string for the user interface
+     */
     Muenze(int wertInCents, String anzeigeName)
     {
         this.wertInCents = wertInCents;
         this.anzeigeName = anzeigeName;
     }
 
+    /**
+     * Gets the monetary value of the coin in cents.
+     *
+     * @return the coin value as an integer
+     */
     public int getWertInCents()
     {
         return wertInCents;
     }
 
+    /**
+     * Gets the user-friendly display name of the coin.
+     *
+     * @return the formatted display name string
+     */
     public String getAnzeigeName()
     {
         return anzeigeName;
