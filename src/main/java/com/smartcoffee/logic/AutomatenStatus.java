@@ -12,5 +12,4 @@ public enum AutomatenStatus
     BRUEHVORGANG,
     DEFEKT,
     ZUTATEN_FEHLEN;
-
 }

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public record WechselgeldErgebnis(
         boolean erfolgreich,
-        List<Muenze> ausgegebeneMuenzen,
+        List <Muenze> ausgegebeneMuenzen,
         ZahlungsMeldung meldung)
 {
 }
