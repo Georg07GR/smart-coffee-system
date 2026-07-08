@@ -102,7 +102,7 @@ public class DatenbankManager
         try (PreparedStatement pstmt = connection.prepareStatement(sqlQuery))
         {
             pstmt.setInt(1, bestellId);
-            pstmt.setString(2, muenzeTyp.getWertInCents() + " Ct");
+            pstmt.setDouble(2, muenzeTyp.getWertInEuro());
             pstmt.setInt(3, anzahl);
             pstmt.executeUpdate();
         }
@@ -115,13 +115,14 @@ public class DatenbankManager
 
     public void muenzbestandSpeichern(Map<Muenze, Integer> bestand)
     {
-        String sqlQeury = "INSERT OR REPLACE Muenzbestand (muenztyp, anzahl) VALUES (?, ?)";
+        String sqlQeury = "INSERT OR REPLACE INTO Muenzbestand (muenztyp, anzahl) VALUES (?, ?)";
+
 
         for (Map.Entry<Muenze, Integer> entry : bestand.entrySet())
         {
             try (PreparedStatement pstmt = connection.prepareStatement(sqlQeury))
             {
-                pstmt.setString(1, entry.getKey().getWertInCents() + " Ct");
+                pstmt.setDouble(1, entry.getKey().getWertInEuro());
                 pstmt.setInt(2, entry.getValue());
                 pstmt.executeUpdate();
             }
@@ -142,7 +143,7 @@ public class DatenbankManager
         {
             while (rs.next())
             {
-                Muenze muenzeTyp = Muenze.valueOf(rs.getString("muenztyp").replace(" ", "_").toUpperCase());
+                Muenze muenzeTyp = Muenze.fromEuroValue(rs.getDouble("muenztyp"));
                 int anzahl = rs.getInt("anzahl");
                 bestand.put(muenzeTyp, anzahl);
             }
@@ -151,6 +152,14 @@ public class DatenbankManager
         {
             throw new RuntimeException(e);
         }
+        if (bestand.isEmpty())
+        {
+            for (Muenze m : Muenze.values())
+            {
+                bestand.put(m, 10);
+            }
+        }
+        muenzbestandSpeichern(bestand);
     }
 
 
