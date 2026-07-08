@@ -46,7 +46,7 @@ public class Kaffeeautomat
             return false;
         }
 
-        // 2. Prüfung: Genug Kaffeebohnen? (Jede Tasse braucht 25g)
+        // 2. Prüfung: Genug Kaffeebohnen?
         if (kaffeeBestand < 25)
         {
             System.out.println("Nicht genug Kaffee vorhanden.");
@@ -54,7 +54,7 @@ public class Kaffeeautomat
             return false;
         }
 
-        // 3. Prüfung: Genug Milchpulver? (Wenn das Getränk Milch benötigt, werden 10g gebraucht)
+        // 3. Prüfung: Genug Milchpulver?
         if (kaffeeArt.isMitmilch() && milchBestand < 10)
         {
             System.out.println("Nicht genug Milch vorhanden.");
@@ -62,11 +62,20 @@ public class Kaffeeautomat
             return false;
         }
 
-        // 4. Prüfung: Genug Kakao? (Wenn es Heiße Schokolade ist, werden z.B. 15g gebraucht)
-        if (kaffeeArt == KaffeeArt.HOT_CHOCOLATE && cacaoBestand < 15) // Wert angepasst (z.B. 15g)
+        // 4. Prüfung: Genug Kakao?
+        if (kaffeeArt == KaffeeArt.HOT_CHOCOLATE && cacaoBestand < 15)
         {
             System.out.println("Nicht genug Kakao vorhanden.");
             status = AutomatenStatus.ZUTATEN_FEHLEN;
+            return false;
+        }
+
+        // 5. Prüfung: Geht das Mahlwerk kaputt? (2% Chance)
+        if (istMahlwerkKaputt())
+        {
+            System.out.println("Die Kaffeemühle ist kaputt. Maschine defekt.");
+            status = AutomatenStatus.DEFEKT;
+            transaktionsHistorie.add(formattedDateTime + " - DEFEKT: Mahlwerk beschädigt.");
             return false;
         }
 
@@ -86,11 +95,68 @@ public class Kaffeeautomat
         transaktionsHistorie.add(logText);
 
         status = AutomatenStatus.BEREIT;
+
+
+
+        if (tassen % 20 == 0)
+        {
+            System.out.println("Statistik: " + tassen + " Tassen ausgegeben.");
+        }
         return true;
+    }
 
 
 
+    public void auffuellen()
+    {
+        kaffeeBestand = maxKaffee;
+        milchBestand = maxMilch;
+        cacaoBestand = maxcacaoPulver;
 
+
+        if (status == AutomatenStatus.ZUTATEN_FEHLEN || status == AutomatenStatus.DEFEKT)
+        {
+            status = AutomatenStatus.BEREIT;
+        }
+        System.out.println("Kaffeeautomat wurde vollständig aufgefüllt und gereinigt.");
+    }
+
+
+    boolean istMahlwerkKaputt()
+    {
+        return Math.random() < 0.02; // 2% Chance, dass das Mahlwerk kaputt geht
+    }
+
+
+
+    public int getKaffeeBestand()
+    {
+        return kaffeeBestand;
+    }
+
+    public int getMilchBestand()
+    {
+        return milchBestand;
+    }
+
+    public int getCacaoBestand()
+    {
+        return cacaoBestand;
+    }
+
+    public int getTassen()
+    {
+        return tassen;
+    }
+
+    public AutomatenStatus getStatus()
+    {
+        return status;
+    }
+
+    public List<String> getTransaktionsHistorie()
+    {
+        return transaktionsHistorie;
     }
 
 }
