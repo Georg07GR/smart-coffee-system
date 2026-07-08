@@ -44,10 +44,28 @@ public enum Muenze
         return wertInCents;
     }
 
-    public int getWertInEuro()
+    /**
+     * ets the monetary value of the coin in Euro
+     * @return
+     */
+    public double getWertInEuro()
     {
-        return wertInCents / 100;
+        return wertInCents / 100.0;
     }
+
+    public static Muenze fromEuroValue(double euroValue)
+    {
+        int centValue = (int) Math.round(euroValue * 100);
+        for (Muenze muenze : Muenze.values())
+        {
+            if (muenze.getWertInCents() == centValue)
+            {
+                return muenze;
+            }
+        }
+        throw new IllegalArgumentException("No coin found for the given Euro value: " + euroValue);
+    }
+
 
     /**
      * Gets the user-friendly display name of the coin.
