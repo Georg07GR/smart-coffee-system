@@ -19,11 +19,19 @@ public class DatenbankManager
     private final String DB_URL = "jdbc:sqlite:coffee_system.db";
     private Connection connection;
 
+
+    // Default constructor used by the real app
     public DatenbankManager()
+    {
+        this("jdbc:sqlite:coffee_system.db");
+    }
+
+    // Parameterized constructor used by our tests to inject in-memory database
+    public DatenbankManager(String dbUrl)
     {
         try
         {
-            this.connection = DriverManager.getConnection(DB_URL);
+            this.connection = DriverManager.getConnection(dbUrl);
             try (Statement stmt = this.connection.createStatement())
             {
                 stmt.execute("PRAGMA foreign_keys = ON");
@@ -35,6 +43,12 @@ public class DatenbankManager
             throw new RuntimeException(e);
         }
     }
+
+
+
+
+
+
 
     private void initializeSchema()
     {
@@ -97,7 +111,7 @@ public class DatenbankManager
 
     public void zahlungSpeichern(int bestellId, Muenze muenzeTyp, int anzahl)
     {
-        String sqlQuery = "INSERT INTO Zahlungen (bestellung_id, muenztyp, anzahl) VALUES (?, ?, ?)";
+        String sqlQuery = "INSERT INTO Zahlungen(bestellung_id, muenztyp, anzahl) VALUES (?, ?, ?)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sqlQuery))
         {
