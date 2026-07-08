@@ -44,6 +44,11 @@ public enum Muenze
         return wertInCents;
     }
 
+    public int getWertInEuro()
+    {
+        return wertInCents / 100;
+    }
+
     /**
      * Gets the user-friendly display name of the coin.
      *
