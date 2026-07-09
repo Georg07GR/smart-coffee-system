@@ -24,13 +24,13 @@ graph LR
 ### 1.1 Funktionale Anforderungen (Analyse)
 * **Kaffeezubereitung**: Auswahl aus 6 Kaffeesorten mit/ohne Milch:
   * **Espresso** (ohne Milch, 25g Bohnen, 1.50 EUR)
-  * **Black Coffee** (ohne Milch, 25g Bohnen, 2.00 EUR)
-  * **Coffee with Milk** (mit Milch, 25g Bohnen, 10g Milchpulver, 2.20 EUR)
+  * **Black Coffee** (ohne Milch, 25g Bohnen, 1.80 EUR)
+  * **Coffee with Milk** (mit Milch, 25g Bohnen, 10g Milchpulver, 2.00 EUR)
   * **Cappuccino** (mit Milch, 25g Bohnen, 10g Milchpulver, 2.50 EUR)
-  * **Latte** (mit Milch, 25g Bohnen, 10g Milchpulver, 2.50 EUR)
   * **Latte Macchiato** (mit Milch, 25g Bohnen, 10g Milchpulver, 2.80 EUR)
-* **Bestandsprüfung**: Überprüfung der Bestände (Start: 2000g Kaffee, 200g Milch). Automatische Reduzierung bei erfolgreicher Zubereitung.
-* **Bezahlsystem**: Münzeingabe (von 1 Ct bis 2 €), Wechselgeldberechnung. Speicherung der eingeworfenen Münzen zur detaillierten Transaktionsanalyse. Die eingeworfenen Münzen werden vor der Wechselgeldberechnung dem internen Bestand hinzugefügt.
+  * **Hot Chocolate** (mit Milch, 15g Kakaopulver, 10g Milchpulver, 2.20 EUR)
+* **Bestandsprüfung**: Überprüfung der Bestände (Start: 2000g Kaffee, 200g Milch, 100g Kakao). Automatische Reduzierung bei erfolgreicher Zubereitung.
+* **Bezahlsystem**: Münzeingabe (10c, 20c, 50c, 1€, 2€), Wechselgeldberechnung. Speicherung der eingeworfenen Münzen zur detaillierten Transaktionsanalyse. Die eingeworfenen Münzen werden vor der Wechselgeldberechnung dem internen Bestand hinzugefügt.
 * **Systemverwaltung**: Erfassung aller Bestellungen und Münzbestände in einer lokalen SQLite-Datenbank. Fehlerbehandlung bei Ressourcenmangel oder simuliertem Defekt (2% Ausfallwahrscheinlichkeit).
 
 ---
@@ -54,7 +54,7 @@ erDiagram
         DECIMAL muenztyp "Muenze (z.B. 0.50, 1.00)"
         INTEGER anzahl "Menge der Muenzen"
     }
-    Münzbestand {
+    Muenzbestand {
         DECIMAL muenztyp PK "Münz-Nennwert"
         INTEGER anzahl "Aktueller Bestand im Wechsler"
     }
@@ -73,21 +73,19 @@ classDiagram
         BLACK_COFFEE
         COFFEE_WITH_MILK
         CAPPUCCINO
-        LATTE
         LATTE_MACCHIATO
+        HOT_CHOCOLATE
         -String anzeigeName
         -double preis
         -boolean mitMilch
         +getAnzeigeName() String
         +getPreis() double
+        +getPreisInCents() int
         +isMitMilch() boolean
     }
 
     class Muenze {
         <<enumeration>>
-        CENT_1
-        CENT_2
-        CENT_5
         CENT_10
         CENT_20
         CENT_50
@@ -133,6 +131,7 @@ classDiagram
         -AutomatenStatus status
         -int kaffeeBestand
         -int milchBestand
+        -int cacaoBestand
         -int tassen
         -List~String~ transaktionsHistorie
         +getraenkZubereiten(KaffeeArt kaffee) boolean
@@ -153,16 +152,21 @@ classDiagram
         -Connection dbVerbindung
         +bestellungSpeichern(KaffeeArt kaffee) int
         +zahlungSpeichern(int bestellId, Muenze muenztyp, int anzahl) void
-        +datenAbrufen() void
+        +getGesamtumsatz() double
+        +getVerkaufsStatistik() Map~String, Integer~
     }
 
     class GUIController {
         -Kaffeeautomat automat
         -Münzwechsler wechsler
         -DatenbankManager dbManager
-        +getraenkeAnzeigen() void
-        +zahlungVerwalten() void
-        +fehlermeldungAnzeigen(String nachricht) void
+        +initialize() void
+        +onCoffeeSelected(ActionEvent event) void
+        +onCoinInserted(ActionEvent event) void
+        +onCancelPayment(ActionEvent event) void
+        +onToggleTechnicianPanel(ActionEvent event) void
+        +onRefill(ActionEvent event) void
+        +onRepairGrinder(ActionEvent event) void
     }
 
     Kaffeeautomat ..> KaffeeArt : "nutzt"
@@ -187,17 +191,21 @@ Um die Lesbarkeit des Quellcodes zu maximieren und die Wartbarkeit zu verbessern
 
 ---
 
-### 1.5 GUI-Entwurf (Skizze)
-Die JavaFX-Oberfläche besteht aus einem Hauptfenster und einem Zahlungsdialog mit einem modernen, dunklen Design und dem **ByteSized Coffee** Logo im Hintergrund:
-1. **Hauptfenster**:
-   * Getränkeauswahl (Buttons für Espresso, Black Coffee, Coffee with Milk, Cappuccino, Latte, Latte Macchiato) inklusive Preisangabe auf jedem Button.
-   * Statusanzeige der Bestände als visuelle Balken mit exakter Grammangabe (z.B. `1450g / 2000g`).
-   * Anzeige der insgesamt ausgegebenen Tassen.
-   * Fehler-/Info-Log für Statusmeldungen (z.B. "Mahlwerk defekt!", "Bitte Bohnen auffüllen").
-2. **Zahlungsfenster**:
-   * Münzeinwurftasten als stilisierte, runde Münz-Icons.
-   * Anzeige des eingeworfenen Betrags und des noch zu zahlenden Restbetrags.
-   * Anzeige des Wechselgeldbestands im Wechsler.
+### 1.5 Implementierte JavaFX Benutzeroberfläche
+Die grafische Benutzeroberfläche (`main_layout.fxml` & `styles.css`) wurde als moderner, dunkler Simulator mit Premium-Asthetik umgesetzt. Sie ist in zwei funktionale Bereiche unterteilt:
+
+1. **Kunden-Touchscreen (Linke Seite)**:
+   * **Menüauswahl**: 6 stilvolle Getränkekarten mit professionellen, AI-generierten Produktfotos (Espresso, Schwarzer Kaffee, Cappuccino, Latte Macchiato, Heiße Schokolade, Milchkaffee).
+   * **Bühnen-Hintergrund**: Ein großes, dezentes Branding-Wasserzeichen des ByteSized Coffee Logos im Hintergrund (`fitWidth="460"`, `opacity="0.09"`, `mouseTransparent="true"`).
+   * **Münzeinwurf**: Physisch angeordneter Münzeinwurfbalken mit stilisierter, kreisrunder Münz-Tastatur (`10c`, `20c`, `50c`, `1€`, `2€`) direkt neben einem grün leuchtenden, digital-segmentierten LED-Kreditdisplay.
+   * **Zubereitungs-Animation**: Während des Brühvorgangs blockiert ein transluzentes Overlay die Interaktion. Ein stilisierter Becher füllt sich in Echtzeit mit Kaffeeflüssigkeit, synchronisiert mit dem Fortschrittsbalken (Mahlen $\rightarrow$ Erhitzen & Brühen $\rightarrow$ Ausgeben $\rightarrow$ Fertig).
+
+2. **Entwickler- & Bedienerkonsole (Rechte Seite - Ein-/Ausklappbar)**:
+   * **Techniker-Drawer**: Über die Menütaste (`☰ Admin`) im Kunden-Touchscreen kann die Konsole dynamisch ein- und ausgeblendet werden. Die Fensterbreite passt sich fließend an (`720px` eingeklappt, `1080px` ausgeklappt).
+   * **Zutaten-Tanks**: 3 vertikale, pillenförmige Glasröhren zur Füllstandsanzeige (Kaffeebohnen, Milchpulver, Kakaopulver). Fällt ein Bestand unter das kritische Minimum, glühen die Röhren-Ränder rot auf.
+   * **Kassenstand & Münzbestand**: Ein geteiltes Side-by-Side-Panel. Links stehen Umsatz, Kasseninhalt und die Tassenzahl; rechts steht der detaillierte, vertikal ausgerichtete Münzwechslerbestand pro Münztyp (in absteigender Reihenfolge).
+   * **Terminal-Konsole**: Ein retro-grün leuchtendes Log-Fenster, das live Datenbankereignisse, PRAGMA-Initialisierungen und Fehlercodes ausgibt.
+   * **Bedieneraktionen**: Tasten zum manuellen Auffüllen des Automaten und zur Reparatur des Mahlwerks bei Ausfällen.
 
 ---
 
