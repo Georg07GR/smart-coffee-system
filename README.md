@@ -2,9 +2,15 @@
 
 ![ByteSized Coffee Logo](src/main/resources/com/smartcoffee/gui/bytesized_coffee_logo.png)
 
+> [!WARNING]
+> **Haftungsausschluss**
+> Dies ist ein Software-Prototyp. Jegliche Interaktion mit realen Münzen oder elektronischen Zahlungsgeräten ist im Rahmen dieses Projekts nicht vorgesehen und wird nicht unterstützt.
+
 > [!NOTE]
 > **Schulprojekt / Lern-Projekt**
 > Dieses Projekt wurde im Rahmen einer schulischen Projektwoche (LF-ZQ16A) entwickelt. Es dient als praktische Übung zur Anwendung von JavaFX, Software-Design-Mustern (MVC-Pattern), automatisierter Qualitätssicherung mit JUnit-Tests und Datenbank-Persistenz mit SQLite.
+
+Dieses Projekt umfasst die Entwicklung eines softwarebasierten Steuerungssystems für einen Kaffeeautomaten mit integriertem Bezahl- und Münzwechselsystem für die Marke **ByteSized Coffee**. Das System trennt Benutzeroberfläche (JavaFX), Geschäftslogik und Datenhaltung (SQLite).
 
 ---
 
