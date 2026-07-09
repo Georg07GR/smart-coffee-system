@@ -170,7 +170,7 @@
         <!-- ========================================== -->
         <!--  RIGHT PANEL: DEVELOPER/OPERATOR PANEL     -->
         <!-- ========================================== -->
-        <VBox fx:id="developerPanel" styleClass="developer-panel" minWidth="360" prefWidth="360" maxWidth="360" spacing="10">
+        <VBox fx:id="developerPanel" styleClass="developer-panel" minWidth="360" prefWidth="360" maxWidth="360" spacing="6">
             <Label styleClass="dev-title" text="DEVELOPER OPERATOR CONSOLE" />
             
             <!-- Section 1: Ingredient tubes stock -->
@@ -208,7 +208,7 @@
             <Label styleClass="dev-section-title" text="Kassenstand &amp; Münzwechslerbestand" />
             <HBox spacing="10" alignment="CENTER_LEFT" prefHeight="95" minHeight="95" style="-fx-padding: 0 0 5 0;">
                 <!-- Left side: Cashier details -->
-                <VBox spacing="6" minWidth="135" prefWidth="135" maxWidth="135" alignment="CENTER_LEFT">
+                <VBox spacing="6" minWidth="180" prefWidth="180" maxWidth="180" alignment="CENTER_LEFT">
                     <HBox spacing="5" alignment="CENTER_LEFT">
                         <Label style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 13px;" text="Umsatz:" />
                         <Label fx:id="revenueLabel" style="-fx-text-fill: #30D158; -fx-font-weight: bold; -fx-font-size: 13px;" text="0,00 €" />
@@ -227,7 +227,7 @@
                 <Separator orientation="VERTICAL" prefHeight="80" style="-fx-opacity: 0.15;" />
                 
                 <!-- Right side: Coin stocks list -->
-                <VBox spacing="3" minWidth="160" prefWidth="160" maxWidth="160" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <VBox spacing="3" minWidth="110" prefWidth="110" maxWidth="110" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                     <Label style="-fx-text-fill: rgba(255,255,255,0.4); -fx-font-size: 9px; -fx-font-weight: bold; -fx-letter-spacing: 1.0;" text="MÜNZBESTAND" />
                     <Label fx:id="coinBreakdownLabel" style="-fx-text-fill: rgba(255,255,255,0.85); -fx-font-size: 11px; -fx-font-family: monospace; -fx-line-spacing: 1;" text="2€ : 10 Stk&#10;1€ : 10 Stk&#10;50c: 10 Stk&#10;20c: 10 Stk&#10;10c: 10 Stk" />
                 </VBox>
@@ -235,7 +235,7 @@
             
             <!-- Section 3: Live Database Log Terminal -->
             <Label styleClass="dev-section-title" text="Verlauf Datenbank &amp; System Log" />
-            <TextArea fx:id="terminalLog" styleClass="dev-terminal" prefHeight="185" editable="false" wrapText="true" />
+            <TextArea fx:id="terminalLog" styleClass="dev-terminal" prefHeight="175" editable="false" wrapText="true" />
             
             <!-- Action buttons: Refill resources & repair grinder -->
             <HBox spacing="15" alignment="CENTER" style="-fx-padding: 10 0 0 0;">
