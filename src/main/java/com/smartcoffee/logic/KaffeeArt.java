@@ -57,6 +57,16 @@ public enum KaffeeArt
     }
 
     /**
+     * Gets the price of the beverage in cents.
+     *
+     * @return the price in cents as an integer
+     */
+    public int getPreisInCents()
+    {
+        return (int) Math.round(preis * 100);
+    }
+
+    /**
      * Checks if the beverage requires milk powder during preparation.
      *
      * @return true if milk powder is required, false otherwise

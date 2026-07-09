@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.shape.Rectangle?>
+
+<StackPane xmlns="http://javafx.com/javafx/21" 
+           xmlns:fx="http://javafx.com/fxml/1" 
+           fx:controller="com.smartcoffee.gui.GUIController"
+           stylesheets="@styles.css">
+
+    <!-- Main side-by-side split container -->
+    <HBox fx:id="mainContainer" styleClass="root-container">
+        
+        <!-- ========================================== -->
+        <!--  LEFT PANEL: CUSTOMER TOUCHSCREEN INTERFACE -->
+        <!-- ========================================== -->
+        <!-- Wrapped in a StackPane to overlay the background logo watermark -->
+        <StackPane styleClass="customer-panel-container" HBox.hgrow="ALWAYS" minWidth="650">
+            <!-- Faded Background Watermark Logo -->
+            <ImageView fx:id="logoView" fitWidth="320" preserveRatio="true" opacity="0.04" mouseTransparent="true" />
+            
+            <VBox fx:id="customerPanel" styleClass="customer-panel" alignment="TOP_CENTER" spacing="10">
+                <!-- Header bar -->
+                <HBox alignment="CENTER_LEFT" spacing="15" prefHeight="50" minHeight="50">
+                    <!-- Clean Text Branding Title -->
+                    <Label styleClass="brand-title" text="ByteSized Coffee" />
+                    
+                    <!-- Spacer pushes content to the right -->
+                    <Region HBox.hgrow="ALWAYS" />
+                    
+                    <!-- Technician Toggle Key Button -->
+                    <Button fx:id="gearButton" styleClass="gear-button" text="☰ Admin" onAction="#onToggleTechnicianPanel" />
+                </HBox>
+                
+                <!-- Separator Line -->
+                <Separator prefWidth="200" style="-fx-opacity: 0.05;" />
+                
+                <!-- Coffee Drinks Menu Grid -->
+                <GridPane styleClass="coffee-grid" hgap="20" vgap="15" alignment="CENTER" VBox.vgrow="ALWAYS">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="195" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="195" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="195" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10" prefHeight="175" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10" prefHeight="175" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    
+                    <!-- Row 1: Espresso, Black Coffee, Cappuccino -->
+                    <Button fx:id="espressoBtn" styleClass="coffee-card" onAction="#onCoffeeSelected" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <graphic>
+                            <VBox alignment="CENTER" spacing="5">
+                                <ImageView fitWidth="70" fitHeight="70" preserveRatio="true">
+                                    <image>
+                                        <Image url="@espresso.png" />
+                                    </image>
+                                </ImageView>
+                                <Label styleClass="coffee-name" text="Espresso" />
+                                <Label styleClass="coffee-price" text="1,50 €" />
+                            </VBox>
+                        </graphic>
+                    </Button>
+
+                    <Button fx:id="blackCoffeeBtn" styleClass="coffee-card" onAction="#onCoffeeSelected" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <graphic>
+                            <VBox alignment="CENTER" spacing="5">
+                                <ImageView fitWidth="70" fitHeight="70" preserveRatio="true">
+                                    <image>
+                                        <Image url="@black_coffee.png" />
+                                    </image>
+                                </ImageView>
+                                <Label styleClass="coffee-name" text="Black Coffee" />
+                                <Label styleClass="coffee-price" text="1,80 €" />
+                            </VBox>
+                        </graphic>
+                    </Button>
+
+                    <Button fx:id="cappuccinoBtn" styleClass="coffee-card" onAction="#onCoffeeSelected" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                        <graphic>
+                            <VBox alignment="CENTER" spacing="5">
+                                <ImageView fitWidth="70" fitHeight="70" preserveRatio="true">
+                                    <image>
+                                        <Image url="@cappuccino.png" />
+                                    </image>
+                                </ImageView>
+                                <Label styleClass="coffee-name" text="Cappuccino" />
+                                <Label styleClass="coffee-price" text="2,50 €" />
+                            </VBox>
+                        </graphic>
+                    </Button>
+                    
+                    <!-- Row 2: Latte Macchiato, Hot Chocolate, Coffee with Milk -->
+                    <Button fx:id="latteBtn" styleClass="coffee-card" onAction="#onCoffeeSelected" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <graphic>
+                            <VBox alignment="CENTER" spacing="5">
+                                <ImageView fitWidth="70" fitHeight="70" preserveRatio="true">
+                                    <image>
+                                        <Image url="@latte_macchiato.png" />
+                                    </image>
+                                </ImageView>
+                                <Label styleClass="coffee-name" text="Latte Macchiato" />
+                                <Label styleClass="coffee-price" text="2,80 €" />
+                            </VBox>
+                        </graphic>
+                    </Button>
+
+                    <Button fx:id="cacaoBtn" styleClass="coffee-card" onAction="#onCoffeeSelected" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <graphic>
+                            <VBox alignment="CENTER" spacing="5">
+                                <ImageView fitWidth="70" fitHeight="70" preserveRatio="true">
+                                    <image>
+                                        <Image url="@hot_chocolate.png" />
+                                    </image>
+                                </ImageView>
+                                <Label styleClass="coffee-name" text="Hot Chocolate" />
+                                <Label styleClass="coffee-price" text="2,20 €" />
+                            </VBox>
+                        </graphic>
+                    </Button>
+
+                    <Button fx:id="coffeeMilkBtn" styleClass="coffee-card" onAction="#onCoffeeSelected" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <graphic>
+                            <VBox alignment="CENTER" spacing="5">
+                                <ImageView fitWidth="70" fitHeight="70" preserveRatio="true">
+                                    <image>
+                                        <Image url="@coffee_milk.png" />
+                                    </image>
+                                </ImageView>
+                                <Label styleClass="coffee-name" text="Coffee with Milk" />
+                                <Label styleClass="coffee-price" text="2,00 €" />
+                            </VBox>
+                        </graphic>
+                    </Button>
+                </GridPane>
+                
+                <Separator prefWidth="200" style="-fx-opacity: 0.05;" />
+                
+                <!-- Bottom Section: Payments slot & status messages -->
+                <VBox spacing="5" alignment="CENTER" prefHeight="100" minHeight="100">
+                    <Label fx:id="statusLabel" styleClass="status-label" text="Bitte werfen Sie Münzen ein, um zu beginnen..." />
+                    
+                    <HBox spacing="12" alignment="CENTER">
+                        <!-- Digital Credit LED Display (moved here next to coins!) -->
+                        <VBox styleClass="led-display-container" alignment="CENTER" prefHeight="50" minHeight="50">
+                            <Label fx:id="creditDisplay" styleClass="led-display" text="0,00 €" style="-fx-font-size: 20px; -fx-padding: 0 10;" />
+                        </VBox>
+                        
+                        <Region prefWidth="5" />
+                        
+                        <!-- Coin simulation trigger buttons -->
+                        <Button styleClass="action-button, coin-button" text="10c" onAction="#onCoinInserted" userData="CENT_10" />
+                        <Button styleClass="action-button, coin-button" text="20c" onAction="#onCoinInserted" userData="CENT_20" />
+                        <Button styleClass="action-button, coin-button" text="50c" onAction="#onCoinInserted" userData="CENT_50" />
+                        <Button styleClass="action-button, coin-button" text="1€" onAction="#onCoinInserted" userData="EURO_1" />
+                        <Button styleClass="action-button, coin-button" text="2€" onAction="#onCoinInserted" userData="EURO_2" />
+                        
+                        <Region prefWidth="5" />
+                        
+                        <!-- Cancel Transaction & Return Coins -->
+                        <Button fx:id="cancelBtn" styleClass="action-button, cancel-button" text="Abbrechen" onAction="#onCancelPayment" />
+                    </HBox>
+                </VBox>
+            </VBox>
+        </StackPane>
+        
+        <!-- ========================================== -->
+        <!--  RIGHT PANEL: DEVELOPER/OPERATOR PANEL     -->
+        <!-- ========================================== -->
+        <VBox fx:id="developerPanel" styleClass="developer-panel" minWidth="360" prefWidth="360" maxWidth="360" spacing="10">
+            <Label styleClass="dev-title" text="DEVELOPER OPERATOR CONSOLE" />
+            
+            <!-- Section 1: Ingredient tubes stock -->
+            <Label styleClass="dev-section-title" text="Maschinen-Zutaten (Resource Stock)" />
+            <HBox spacing="25" alignment="CENTER" prefHeight="160">
+                <!-- Coffee Beans tube -->
+                <VBox alignment="CENTER" spacing="5">
+                    <Label styleClass="tube-label" text="Kaffeebohnen" />
+                    <StackPane styleClass="resource-glass-tube" prefWidth="35" prefHeight="110" alignment="BOTTOM_CENTER">
+                        <Region fx:id="coffeeFill" styleClass="fluid-fill-coffee" prefWidth="29" prefHeight="110" />
+                    </StackPane>
+                    <Label fx:id="coffeeAmount" styleClass="resource-amount-text" text="2000g" />
+                </VBox>
+
+                <!-- Milk Powder tube -->
+                <VBox alignment="CENTER" spacing="5">
+                    <Label styleClass="tube-label" text="Milchpulver" />
+                    <StackPane styleClass="resource-glass-tube" prefWidth="35" prefHeight="110" alignment="BOTTOM_CENTER">
+                        <Region fx:id="milkFill" styleClass="fluid-fill-milk" prefWidth="29" prefHeight="110" />
+                    </StackPane>
+                    <Label fx:id="milkAmount" styleClass="resource-amount-text" text="200g" />
+                </VBox>
+
+                <!-- Cocoa Powder tube -->
+                <VBox alignment="CENTER" spacing="5">
+                    <Label styleClass="tube-label" text="Kakaopulver" />
+                    <StackPane styleClass="resource-glass-tube" prefWidth="35" prefHeight="110" alignment="BOTTOM_CENTER">
+                        <Region fx:id="cacaoFill" styleClass="fluid-fill-cacao" prefWidth="29" prefHeight="110" />
+                    </StackPane>
+                    <Label fx:id="cacaoAmount" styleClass="resource-amount-text" text="100g" />
+                </VBox>
+            </HBox>
+            
+            <!-- Section 2: Cashier Coin Chest details -->
+            <Label styleClass="dev-section-title" text="Kassenstand &amp; Münzwechslerbestand" />
+            <GridPane hgap="10" vgap="4" style="-fx-padding: 0 0 5 0;">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="110" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="110" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="110" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10" prefHeight="20" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10" prefHeight="20" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10" prefHeight="20" vgrow="SOMETIMES" />
+                </rowConstraints>
+                
+                <Label style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 11px;" text="Umsatz: " GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label fx:id="revenueLabel" style="-fx-text-fill: #30D158; -fx-font-weight: bold; -fx-font-size: 11px;" text="0,00 €" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                
+                <Label style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 11px;" text="Kasseninhalt: " GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label fx:id="cashInChangerLabel" style="-fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-font-size: 11px;" text="80,00 €" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 11px;" text="Tassen gesamt: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label fx:id="tassenLabel" style="-fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-font-size: 11px;" text="0 Tassen" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            </GridPane>
+            
+            <!-- Detailed Coin Stocks -->
+            <HBox spacing="8" alignment="CENTER_LEFT" style="-fx-padding: 0 0 5 0;">
+                <Label style="-fx-text-fill: rgba(255,255,255,0.4); -fx-font-size: 10px;" text="Detail:" />
+                <Label fx:id="coinBreakdownLabel" style="-fx-text-fill: rgba(255,255,255,0.7); -fx-font-size: 10px; -fx-font-family: monospace;" text="2€:10 | 1€:10 | 50c:10 | 20c:10 | 10c:10" />
+            </HBox>
+            
+            <!-- Section 3: Live Database Log Terminal -->
+            <Label styleClass="dev-section-title" text="Verlauf Datenbank &amp; System Log" />
+            <TextArea fx:id="terminalLog" styleClass="dev-terminal" prefHeight="130" editable="false" wrapText="true" />
+            
+            <!-- Action buttons: Refill resources & repair grinder -->
+            <HBox spacing="15" alignment="CENTER" style="-fx-padding: 10 0 0 0;">
+                <Button fx:id="refillBtn" styleClass="action-button, dev-button" text="Refill &amp; Clean" onAction="#onRefill" />
+                <Button fx:id="repairBtn" styleClass="action-button, dev-button, repair-button" text="Repair Grinder" onAction="#onRepairGrinder" />
+            </HBox>
+        </VBox>
+    </HBox>
+    
+    <!-- ========================================== -->
+    <!--  PREPARATION OVERLAY (BREWING SCREEN)       -->
+    <!-- ========================================== -->
+    <VBox fx:id="brewingOverlay" styleClass="overlay-background" alignment="CENTER" visible="false">
+        <VBox styleClass="overlay-card" alignment="CENTER" spacing="15" maxWidth="380">
+            <Label styleClass="overlay-title" text="Zubereitung läuft..." />
+            
+            <!-- Custom Vector Cup Animation Shape -->
+            <HBox alignment="CENTER" prefHeight="70">
+                <!-- Cup Body containing a liquid Region aligned to bottom -->
+                <VBox prefWidth="60" prefHeight="65" styleClass="vector-cup-body" alignment="BOTTOM_CENTER">
+                    <Region fx:id="liquidFill" styleClass="liquid-fill-coffee" prefWidth="56" prefHeight="0" />
+                </VBox>
+                <Region prefWidth="12" prefHeight="35" styleClass="vector-cup-handle" />
+            </HBox>
+            
+            <ProgressIndicator fx:id="brewingProgress" prefWidth="60" prefHeight="60" progress="-1" style="-fx-progress-color: #FF9F0A;" />
+            <Label fx:id="overlayStatusLabel" styleClass="overlay-status" text="Mahlwerk arbeitet..." />
+        </VBox>
+    </VBox>
+</StackPane>

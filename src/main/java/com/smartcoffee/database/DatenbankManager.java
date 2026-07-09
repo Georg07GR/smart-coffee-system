@@ -223,4 +223,53 @@ public class DatenbankManager
         }
         muenzbestandSpeichern(bestand);
     }
+
+    /**
+     * Calculates the total sales revenue generated from all recorded orders in the database.
+     *
+     * @return The sum of all order prices as a double value in Euro.
+     * @throws RuntimeException If connection queries fail.
+     */
+    public double getGesamtumsatz()
+    {
+        String sqlQuery = "SELECT SUM(preis) FROM Bestellungen";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sqlQuery))
+        {
+            if (rs.next())
+            {
+                return rs.getDouble(1);
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        return 0.0;
+    }
+
+    /**
+     * Loads product-specific statistics, returning a map of coffee names mapped to the total quantity sold.
+     *
+     * @return A map mapping the drink's string name to its total order count in database.
+     * @throws RuntimeException If connection queries fail.
+     */
+    public Map<String, Integer> getVerkaufsStatistik()
+    {
+        Map<String, Integer> stats = new java.util.HashMap<>();
+        String sqlQuery = "SELECT kaffeeart, COUNT(*) as anzahl FROM Bestellungen GROUP BY kaffeeart";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sqlQuery))
+        {
+            while (rs.next())
+            {
+                stats.put(rs.getString("kaffeeart"), rs.getInt("anzahl"));
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        return stats;
+    }
 }

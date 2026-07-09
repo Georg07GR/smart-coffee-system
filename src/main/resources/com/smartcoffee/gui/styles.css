@@ -1,0 +1,304 @@
+/* CSS Stylesheet for ByteSized Coffee Simulator */
+
+/* Main layout background - Premium dark gradient */
+.root-container {
+    -fx-background-color: linear-gradient(to bottom right, #0e0e10, #18181c);
+    -fx-font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+/* --- CUSTOMER TOUCHSCREEN PANEL --- */
+/* The parent container holds the solid background so watermark shows on top of it */
+.customer-panel-container {
+    -fx-background-color: #121214;
+    -fx-border-color: #222226;
+    -fx-border-width: 0 1 0 0; /* Right border only to separate panels */
+}
+
+.customer-panel {
+    -fx-background-color: transparent;
+    -fx-padding: 20;
+}
+
+/* Header branding text */
+.brand-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+/* LED Credit Display - Glowing segmented look */
+.led-display-container {
+    -fx-background-color: #08080a;
+    -fx-background-radius: 8;
+    -fx-border-color: #222226;
+    -fx-border-width: 1;
+    -fx-padding: 8 16;
+}
+.led-display {
+    -fx-font-family: 'Courier New', monospace;
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+    -fx-text-fill: #30D158; /* Glowing green */
+    -fx-effect: dropshadow(three-pass-box, rgba(48, 209, 88, 0.4), 10, 0, 0, 0);
+}
+
+/* Coffee Cards Grid */
+.coffee-grid {
+    -fx-padding: 20 0;
+}
+
+/* Premium Coffee Card - Glassmorphism style */
+.coffee-card {
+    -fx-background-color: rgba(255, 255, 255, 0.02);
+    -fx-background-radius: 24; /* Smoother, higher rounding */
+    -fx-border-radius: 24;     /* Rounds the border outline as well! */
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1.2;
+    -fx-padding: 15;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-min-width: 165;       /* Smaller card width */
+    -fx-min-height: 145;      /* Smaller card height */
+    -fx-transition: all 0.3s ease-in-out;
+}
+.coffee-card:hover {
+    -fx-background-color: rgba(255, 159, 10, 0.04);
+    -fx-border-color: #FF9F0A; /* Glowing amber border matches the rounded corners! */
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 159, 10, 0.3), 12, 0, 0, 0);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+.coffee-card:pressed {
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+/* Icon Placeholders inside cards */
+.coffee-icon-placeholder {
+    -fx-font-size: 32px;
+    -fx-text-fill: #FF9F0A;
+    -fx-padding: 0 0 10 0;
+}
+
+.coffee-name {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 5 0;
+}
+
+.coffee-price {
+    -fx-text-fill: rgba(255, 255, 255, 0.6);
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+}
+
+/* Payment Status Label */
+.status-label {
+    -fx-text-fill: #8e8e93;
+    -fx-font-size: 14px;
+    -fx-font-style: italic;
+    -fx-padding: 10 0;
+}
+
+/* Coins & General Buttons */
+.action-button {
+    -fx-background-color: #1c1c1e;
+    -fx-background-radius: 8;
+    -fx-border-color: #2c2c2e;
+    -fx-border-width: 1;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 16;
+    -fx-cursor: hand;
+}
+.action-button:hover {
+    -fx-background-color: #2c2c2e;
+    -fx-border-color: #3a3a3c;
+}
+.action-button:pressed {
+    -fx-background-color: #121214;
+}
+
+/* Coin insertion buttons specific style */
+.coin-button {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-text-fill: #FF9F0A;
+    -fx-font-size: 14px;
+    -fx-min-width: 55;
+    -fx-min-height: 55;
+    -fx-background-radius: 50; /* Round circle shape */
+    -fx-border-radius: 50;
+}
+.coin-button:hover {
+    -fx-background-color: rgba(255, 159, 10, 0.1);
+    -fx-border-color: #FF9F0A;
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 159, 10, 0.25), 8, 0, 0, 0);
+}
+
+.cancel-button {
+    -fx-background-color: #3a1515;
+    -fx-border-color: #6a1c1c;
+    -fx-text-fill: #ff453a; /* iOS Red */
+}
+.cancel-button:hover {
+    -fx-background-color: #5a1c1c;
+    -fx-border-color: #8c2828;
+}
+
+/* Technician Toggle Gear Button (now ☰ Admin) */
+.gear-button {
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-text-fill: rgba(255, 255, 255, 0.5);
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 6 12;
+    -fx-transition: all 0.2s ease-in-out;
+}
+.gear-button:hover {
+    -fx-background-color: rgba(255, 159, 10, 0.05);
+    -fx-border-color: #FF9F0A;
+    -fx-text-fill: #FF9F0A;
+    -fx-scale-x: 1.04;
+    -fx-scale-y: 1.04;
+}
+
+
+/* --- DEVELOPER / TECHNICIAN CONSOLE PANEL --- */
+.developer-panel {
+    -fx-background-color: #16161a;
+    -fx-padding: 20;
+    -fx-border-color: #222226;
+    -fx-border-width: 0 0 0 1; /* Left border to split from touchscreen */
+}
+
+.dev-title {
+    -fx-text-fill: rgba(255, 255, 255, 0.4);
+    -fx-font-size: 11px;
+    -fx-font-weight: 900;
+    -fx-letter-spacing: 1.5;
+    -fx-padding: 0 0 15 0;
+}
+
+.dev-section-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 0 5 0;
+}
+
+/* Fluid resource tube indicators */
+.tube-label {
+    -fx-text-fill: rgba(255, 255, 255, 0.5);
+    -fx-font-size: 11px;
+    -fx-alignment: center;
+}
+
+.resource-glass-tube {
+    -fx-background-color: #0c0c0e;
+    -fx-background-radius: 12;
+    -fx-border-color: #222226;
+    -fx-border-width: 1;
+    -fx-padding: 2;
+}
+
+.fluid-fill-coffee {
+    -fx-background-color: linear-gradient(to top, #3e2723, #5d4037);
+    -fx-background-radius: 10;
+}
+
+.fluid-fill-milk {
+    -fx-background-color: linear-gradient(to top, #d7ccc8, #efebe9);
+    -fx-background-radius: 10;
+}
+
+.fluid-fill-cacao {
+    -fx-background-color: linear-gradient(to top, #4e342e, #6d4c41);
+    -fx-background-radius: 10;
+}
+
+.resource-amount-text {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+/* Developer Retro Log Terminal */
+.dev-terminal {
+    -fx-control-inner-background: #08080a;
+    -fx-text-fill: #30D158; /* Hacker green */
+    -fx-font-family: 'Courier New', monospace;
+    -fx-font-size: 11px;
+    -fx-border-color: #222226;
+    -fx-border-width: 1;
+}
+
+/* Dev Refill & Repair Buttons */
+.dev-button {
+    -fx-background-color: #121214;
+    -fx-border-color: #30D158; /* Green border */
+    -fx-text-fill: #30D158;
+}
+.dev-button:hover {
+    -fx-background-color: rgba(48, 209, 88, 0.1);
+    -fx-effect: dropshadow(three-pass-box, rgba(48, 209, 88, 0.25), 8, 0, 0, 0);
+}
+
+.repair-button {
+    -fx-border-color: #ff9f0a; /* Amber border */
+    -fx-text-fill: #ff9f0a;
+}
+.repair-button:hover {
+    -fx-background-color: rgba(255, 159, 10, 0.1);
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 159, 10, 0.25), 8, 0, 0, 0);
+}
+
+
+/* --- PREPARATION OVERLAY (BREWING VIEW) --- */
+.overlay-background {
+    -fx-background-color: rgba(14, 14, 16, 0.85); /* Highly blurred dark overlay */
+}
+
+.overlay-card {
+    -fx-background-color: #1c1c1e;
+    -fx-background-radius: 20;
+    -fx-border-color: #FF9F0A;
+    -fx-border-width: 1;
+    -fx-padding: 30;
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 159, 10, 0.2), 25, 0, 0, 0);
+}
+
+.overlay-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 10 0;
+}
+
+.overlay-status {
+    -fx-text-fill: #FF9F0A;
+    -fx-font-size: 16px;
+    -fx-font-weight: 500;
+}
+
+/* Custom coffee cup visual style using CSS borders and radius */
+.vector-cup-body {
+    -fx-background-color: #121214;
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-width: 0 2 2 2; /* Cup shape */
+    -fx-background-radius: 0 0 20 20;
+    -fx-border-radius: 0 0 20 20;
+}
+
+.vector-cup-handle {
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-width: 2 2 2 0;
+    -fx-background-radius: 0 10 10 0;
+    -fx-border-radius: 0 10 10 0;
+}

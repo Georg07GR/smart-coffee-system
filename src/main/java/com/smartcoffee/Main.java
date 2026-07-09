@@ -1,25 +1,28 @@
 package com.smartcoffee;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
- * Basic JavaFX Main application to verify project setup and dependencies.
+ * Main application launcher for ByteSized Coffee.
+ * Loads the graphical FXML layout and sets up the primary window stage.
  */
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) {
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
-        Label label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+    public void start(Stage stage) throws Exception {
+        // Load the FXML layout file
+        Parent root = FXMLLoader.load(getClass().getResource("/com/smartcoffee/gui/main_layout.fxml"));
         
-        Scene scene = new Scene(new StackPane(label), 640, 480);
+        // Define dimensions (starts collapsed at 720px: customer touchscreen only)
+        Scene scene = new Scene(root, 720, 680);
+        
         stage.setScene(scene);
-        stage.setTitle("Smart Coffee & Payment System - Setup Verification");
+        stage.setTitle("ByteSized Coffee Simulator");
+        stage.setResizable(false); // Lock manual resizing to preserve layout, programmatic toggle resizing still works!
         stage.show();
     }
 
