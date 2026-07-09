@@ -228,3 +228,10 @@ Im Projektverzeichnis folgenden Befehl ausführen:
 ```bash
 mvn javafx:run
 ```
+
+### Entwickler-Dokumentation (JavaDoc)
+Die JavaDoc-Dokumentation für alle Klassen und Schnittstellen kann mit folgendem Befehl generiert werden:
+```bash
+mvn javadoc:javadoc
+```
+Nach erfolgreicher Generierung befindet sich die Dokumentation im Ordner `target/site/apidocs/` und kann durch Öffnen der Datei `index.html` im Webbrowser eingesehen werden.
