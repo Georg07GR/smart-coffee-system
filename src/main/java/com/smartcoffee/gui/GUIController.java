@@ -399,10 +399,10 @@ public class GUIController {
         milkAmount.setText(milk + "g");
         cacaoAmount.setText(cacao + "g");
 
-        // Scale heights (Max heights of cylinders is 110px in CSS)
-        coffeeFill.setPrefHeight(110.0 * (coffee / 2000.0));
-        milkFill.setPrefHeight(110.0 * (milk / 200.0));
-        cacaoFill.setPrefHeight(110.0 * (cacao / 100.0));
+        // Scale heights (Max heights of cylinders is 70px in FXML/CSS)
+        coffeeFill.setPrefHeight(70.0 * (coffee / 2000.0));
+        milkFill.setPrefHeight(70.0 * (milk / 200.0));
+        cacaoFill.setPrefHeight(70.0 * (cacao / 100.0));
 
         // Visual warning alert (If resource is low, make the gauge borders glow orange-red)
         setResourceLowAlert(coffeeFill, coffee < 150);
@@ -426,15 +426,24 @@ public class GUIController {
         int sumCents = 0;
         StringBuilder breakdown = new StringBuilder();
 
+        // 1. Calculate sum including all coins
         for (Muenze m : Muenze.values()) {
             int count = stock.getOrDefault(m, 0);
             sumCents += count * m.getWertInCents();
-            breakdown.append(m.getAnzeigeName()).append(":").append(count).append(" | ");
         }
 
-        // Remove trailing separator
-        if (breakdown.length() > 3) {
-            breakdown.setLength(breakdown.length() - 3);
+        // 2. Format list vertically in descending order, skipping 1c, 2c, 5c
+        Muenze[] coins = Muenze.values();
+        for (int i = coins.length - 1; i >= 0; i--) {
+            Muenze m = coins[i];
+            if (m.getWertInCents() < 10) continue; // Skip very small coins to fit UI elegantly
+            int count = stock.getOrDefault(m, 0);
+            breakdown.append(String.format("%-4s: %d Stk\n", m.getAnzeigeName(), count));
+        }
+
+        // Remove trailing newline
+        if (breakdown.length() > 0) {
+            breakdown.setLength(breakdown.length() - 1);
         }
 
         cashInChangerLabel.setText(formatEuro(sumCents));

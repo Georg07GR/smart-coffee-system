@@ -202,7 +202,7 @@
 
 .resource-glass-tube {
     -fx-background-color: #0c0c0e;
-    -fx-background-radius: 6; /* Thinner tubes need smaller rounding */
+    -fx-background-radius: 8; /* Perfectly rounded capsule shape for 16px width */
     -fx-border-color: #222226;
     -fx-border-width: 1;
     -fx-padding: 1.5;
@@ -210,17 +210,17 @@
 
 .fluid-fill-coffee {
     -fx-background-color: linear-gradient(to top, #3e2723, #5d4037);
-    -fx-background-radius: 4;
+    -fx-background-radius: 6; /* Capsule rounding for 12px width fill */
 }
 
 .fluid-fill-milk {
     -fx-background-color: linear-gradient(to top, #d7ccc8, #efebe9);
-    -fx-background-radius: 4;
+    -fx-background-radius: 6;
 }
 
 .fluid-fill-cacao {
     -fx-background-color: linear-gradient(to top, #4e342e, #6d4c41);
-    -fx-background-radius: 4;
+    -fx-background-radius: 6;
 }
 
 .resource-amount-text {
