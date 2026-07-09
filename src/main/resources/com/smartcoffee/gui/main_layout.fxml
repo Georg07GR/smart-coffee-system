@@ -175,7 +175,7 @@
             
             <!-- Section 1: Ingredient tubes stock -->
             <Label styleClass="dev-section-title" text="Maschinen-Zutaten (Resource Stock)" />
-            <HBox spacing="35" alignment="CENTER" prefHeight="115">
+            <HBox spacing="35" alignment="CENTER" prefHeight="95">
                 <!-- Coffee Beans tube -->
                 <VBox alignment="CENTER" spacing="3">
                     <Label styleClass="tube-label" text="Kaffeebohnen" style="-fx-font-size: 10px;" />
@@ -206,7 +206,7 @@
             
             <!-- Section 2: Cashier Coin Chest details -->
             <Label styleClass="dev-section-title" text="Kassenstand &amp; Münzwechslerbestand" />
-            <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 0 0 5 0;">
+            <HBox spacing="10" alignment="CENTER_LEFT" prefHeight="95" minHeight="95" style="-fx-padding: 0 0 5 0;">
                 <!-- Left side: Cashier details -->
                 <VBox spacing="6" minWidth="135" prefWidth="135" maxWidth="135" alignment="CENTER_LEFT">
                     <HBox spacing="5" alignment="CENTER_LEFT">
