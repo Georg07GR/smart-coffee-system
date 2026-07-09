@@ -296,6 +296,12 @@
     -fx-border-radius: 0 0 20 20;
 }
 
+/* Liquid filling shape inside the cup VBox */
+.liquid-fill-coffee {
+    -fx-background-color: linear-gradient(to top, #3e2723, #a1887f);
+    -fx-background-radius: 0 0 18 18; /* Conforms to rounded bottom of cup body */
+}
+
 .vector-cup-handle {
     -fx-border-color: rgba(255, 255, 255, 0.2);
     -fx-border-width: 2 2 2 0;

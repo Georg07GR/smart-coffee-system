@@ -20,7 +20,7 @@
         <!-- Wrapped in a StackPane to overlay the background logo watermark -->
         <StackPane styleClass="customer-panel-container" HBox.hgrow="ALWAYS" minWidth="650">
             <!-- Faded Background Watermark Logo -->
-            <ImageView fx:id="logoView" fitWidth="320" preserveRatio="true" opacity="0.04" mouseTransparent="true" />
+            <ImageView fx:id="logoView" fitWidth="460" preserveRatio="true" opacity="0.09" mouseTransparent="true" />
             
             <VBox fx:id="customerPanel" styleClass="customer-panel" alignment="TOP_CENTER" spacing="10">
                 <!-- Header bar -->
@@ -206,9 +206,9 @@
             
             <!-- Section 2: Cashier Coin Chest details -->
             <Label styleClass="dev-section-title" text="Kassenstand &amp; Münzwechslerbestand" />
-            <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 0 0 5 0;">
+            <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 0 0 5 0;">
                 <!-- Left side: Cashier details -->
-                <VBox spacing="6" prefWidth="170" alignment="CENTER_LEFT">
+                <VBox spacing="6" minWidth="135" prefWidth="135" maxWidth="135" alignment="CENTER_LEFT">
                     <HBox spacing="5" alignment="CENTER_LEFT">
                         <Label style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 13px;" text="Umsatz:" />
                         <Label fx:id="revenueLabel" style="-fx-text-fill: #30D158; -fx-font-weight: bold; -fx-font-size: 13px;" text="0,00 €" />
@@ -224,10 +224,10 @@
                 </VBox>
                 
                 <!-- Vertical Divider -->
-                <Separator orientation="VERTICAL" prefHeight="70" style="-fx-opacity: 0.15;" />
+                <Separator orientation="VERTICAL" prefHeight="80" style="-fx-opacity: 0.15;" />
                 
                 <!-- Right side: Coin stocks list -->
-                <VBox spacing="3" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <VBox spacing="3" minWidth="160" prefWidth="160" maxWidth="160" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                     <Label style="-fx-text-fill: rgba(255,255,255,0.4); -fx-font-size: 9px; -fx-font-weight: bold; -fx-letter-spacing: 1.0;" text="MÜNZBESTAND" />
                     <Label fx:id="coinBreakdownLabel" style="-fx-text-fill: rgba(255,255,255,0.85); -fx-font-size: 11px; -fx-font-family: monospace; -fx-line-spacing: 1;" text="2€ : 10 Stk&#10;1€ : 10 Stk&#10;50c: 10 Stk&#10;20c: 10 Stk&#10;10c: 10 Stk" />
                 </VBox>
