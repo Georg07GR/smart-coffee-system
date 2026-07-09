@@ -202,25 +202,25 @@
 
 .resource-glass-tube {
     -fx-background-color: #0c0c0e;
-    -fx-background-radius: 12;
+    -fx-background-radius: 6; /* Thinner tubes need smaller rounding */
     -fx-border-color: #222226;
     -fx-border-width: 1;
-    -fx-padding: 2;
+    -fx-padding: 1.5;
 }
 
 .fluid-fill-coffee {
     -fx-background-color: linear-gradient(to top, #3e2723, #5d4037);
-    -fx-background-radius: 10;
+    -fx-background-radius: 4;
 }
 
 .fluid-fill-milk {
     -fx-background-color: linear-gradient(to top, #d7ccc8, #efebe9);
-    -fx-background-radius: 10;
+    -fx-background-radius: 4;
 }
 
 .fluid-fill-cacao {
     -fx-background-color: linear-gradient(to top, #4e342e, #6d4c41);
-    -fx-background-radius: 10;
+    -fx-background-radius: 4;
 }
 
 .resource-amount-text {
@@ -234,7 +234,7 @@
     -fx-control-inner-background: #08080a;
     -fx-text-fill: #30D158; /* Hacker green */
     -fx-font-family: 'Courier New', monospace;
-    -fx-font-size: 11px;
+    -fx-font-size: 12px;   /* Increased font size for legibility */
     -fx-border-color: #222226;
     -fx-border-width: 1;
 }

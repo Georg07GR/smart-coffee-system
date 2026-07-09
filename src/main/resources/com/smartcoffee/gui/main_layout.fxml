@@ -175,32 +175,32 @@
             
             <!-- Section 1: Ingredient tubes stock -->
             <Label styleClass="dev-section-title" text="Maschinen-Zutaten (Resource Stock)" />
-            <HBox spacing="25" alignment="CENTER" prefHeight="160">
+            <HBox spacing="35" alignment="CENTER" prefHeight="115">
                 <!-- Coffee Beans tube -->
-                <VBox alignment="CENTER" spacing="5">
-                    <Label styleClass="tube-label" text="Kaffeebohnen" />
-                    <StackPane styleClass="resource-glass-tube" prefWidth="35" prefHeight="110" alignment="BOTTOM_CENTER">
-                        <Region fx:id="coffeeFill" styleClass="fluid-fill-coffee" prefWidth="29" prefHeight="110" />
+                <VBox alignment="CENTER" spacing="3">
+                    <Label styleClass="tube-label" text="Kaffeebohnen" style="-fx-font-size: 10px;" />
+                    <StackPane styleClass="resource-glass-tube" prefWidth="20" prefHeight="75" alignment="BOTTOM_CENTER">
+                        <Region fx:id="coffeeFill" styleClass="fluid-fill-coffee" prefWidth="16" prefHeight="75" />
                     </StackPane>
-                    <Label fx:id="coffeeAmount" styleClass="resource-amount-text" text="2000g" />
+                    <Label fx:id="coffeeAmount" styleClass="resource-amount-text" text="2000g" style="-fx-font-size: 10px;" />
                 </VBox>
 
                 <!-- Milk Powder tube -->
-                <VBox alignment="CENTER" spacing="5">
-                    <Label styleClass="tube-label" text="Milchpulver" />
-                    <StackPane styleClass="resource-glass-tube" prefWidth="35" prefHeight="110" alignment="BOTTOM_CENTER">
-                        <Region fx:id="milkFill" styleClass="fluid-fill-milk" prefWidth="29" prefHeight="110" />
+                <VBox alignment="CENTER" spacing="3">
+                    <Label styleClass="tube-label" text="Milchpulver" style="-fx-font-size: 10px;" />
+                    <StackPane styleClass="resource-glass-tube" prefWidth="20" prefHeight="75" alignment="BOTTOM_CENTER">
+                        <Region fx:id="milkFill" styleClass="fluid-fill-milk" prefWidth="16" prefHeight="75" />
                     </StackPane>
-                    <Label fx:id="milkAmount" styleClass="resource-amount-text" text="200g" />
+                    <Label fx:id="milkAmount" styleClass="resource-amount-text" text="200g" style="-fx-font-size: 10px;" />
                 </VBox>
 
                 <!-- Cocoa Powder tube -->
-                <VBox alignment="CENTER" spacing="5">
-                    <Label styleClass="tube-label" text="Kakaopulver" />
-                    <StackPane styleClass="resource-glass-tube" prefWidth="35" prefHeight="110" alignment="BOTTOM_CENTER">
-                        <Region fx:id="cacaoFill" styleClass="fluid-fill-cacao" prefWidth="29" prefHeight="110" />
+                <VBox alignment="CENTER" spacing="3">
+                    <Label styleClass="tube-label" text="Kakaopulver" style="-fx-font-size: 10px;" />
+                    <StackPane styleClass="resource-glass-tube" prefWidth="20" prefHeight="75" alignment="BOTTOM_CENTER">
+                        <Region fx:id="cacaoFill" styleClass="fluid-fill-cacao" prefWidth="16" prefHeight="75" />
                     </StackPane>
-                    <Label fx:id="cacaoAmount" styleClass="resource-amount-text" text="100g" />
+                    <Label fx:id="cacaoAmount" styleClass="resource-amount-text" text="100g" style="-fx-font-size: 10px;" />
                 </VBox>
             </HBox>
             
@@ -213,30 +213,30 @@
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="110" />
                 </columnConstraints>
                 <rowConstraints>
-                    <RowConstraints minHeight="10" prefHeight="20" vgrow="SOMETIMES" />
-                    <RowConstraints minHeight="10" prefHeight="20" vgrow="SOMETIMES" />
-                    <RowConstraints minHeight="10" prefHeight="20" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10" prefHeight="24" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10" prefHeight="24" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10" prefHeight="24" vgrow="SOMETIMES" />
                 </rowConstraints>
                 
-                <Label style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 11px;" text="Umsatz: " GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Label fx:id="revenueLabel" style="-fx-text-fill: #30D158; -fx-font-weight: bold; -fx-font-size: 11px;" text="0,00 €" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 13px;" text="Umsatz: " GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label fx:id="revenueLabel" style="-fx-text-fill: #30D158; -fx-font-weight: bold; -fx-font-size: 13px;" text="0,00 €" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                 
-                <Label style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 11px;" text="Kasseninhalt: " GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <Label fx:id="cashInChangerLabel" style="-fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-font-size: 11px;" text="80,00 €" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 13px;" text="Kasseninhalt: " GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label fx:id="cashInChangerLabel" style="-fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-font-size: 13px;" text="80,00 €" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                <Label style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 11px;" text="Tassen gesamt: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <Label fx:id="tassenLabel" style="-fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-font-size: 11px;" text="0 Tassen" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 13px;" text="Tassen gesamt: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label fx:id="tassenLabel" style="-fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-font-size: 13px;" text="0 Tassen" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             </GridPane>
             
             <!-- Detailed Coin Stocks -->
             <HBox spacing="8" alignment="CENTER_LEFT" style="-fx-padding: 0 0 5 0;">
-                <Label style="-fx-text-fill: rgba(255,255,255,0.4); -fx-font-size: 10px;" text="Detail:" />
-                <Label fx:id="coinBreakdownLabel" style="-fx-text-fill: rgba(255,255,255,0.7); -fx-font-size: 10px; -fx-font-family: monospace;" text="2€:10 | 1€:10 | 50c:10 | 20c:10 | 10c:10" />
+                <Label style="-fx-text-fill: rgba(255,255,255,0.4); -fx-font-size: 11px;" text="Detail:" />
+                <Label fx:id="coinBreakdownLabel" style="-fx-text-fill: rgba(255,255,255,0.7); -fx-font-size: 11px; -fx-font-family: monospace;" text="2€:10 | 1€:10 | 50c:10 | 20c:10 | 10c:10" />
             </HBox>
             
             <!-- Section 3: Live Database Log Terminal -->
             <Label styleClass="dev-section-title" text="Verlauf Datenbank &amp; System Log" />
-            <TextArea fx:id="terminalLog" styleClass="dev-terminal" prefHeight="130" editable="false" wrapText="true" />
+            <TextArea fx:id="terminalLog" styleClass="dev-terminal" prefHeight="185" editable="false" wrapText="true" />
             
             <!-- Action buttons: Refill resources & repair grinder -->
             <HBox spacing="15" alignment="CENTER" style="-fx-padding: 10 0 0 0;">
