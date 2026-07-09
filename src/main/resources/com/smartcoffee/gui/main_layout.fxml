@@ -206,7 +206,7 @@
             
             <!-- Section 2: Cashier Coin Chest details -->
             <Label styleClass="dev-section-title" text="Kassenstand &amp; Münzwechslerbestand" />
-            <HBox spacing="10" alignment="CENTER_LEFT" prefHeight="95" minHeight="95" style="-fx-padding: 0 0 5 0;">
+            <HBox spacing="10" alignment="CENTER_LEFT" prefHeight="110" minHeight="110" style="-fx-padding: 0 0 5 0;">
                 <!-- Left side: Cashier details -->
                 <VBox spacing="6" minWidth="180" prefWidth="180" maxWidth="180" alignment="CENTER_LEFT">
                     <HBox spacing="5" alignment="CENTER_LEFT">
@@ -224,7 +224,7 @@
                 </VBox>
                 
                 <!-- Vertical Divider -->
-                <Separator orientation="VERTICAL" prefHeight="80" style="-fx-opacity: 0.15;" />
+                <Separator orientation="VERTICAL" prefHeight="90" style="-fx-opacity: 0.15;" />
                 
                 <!-- Right side: Coin stocks list -->
                 <VBox spacing="3" minWidth="110" prefWidth="110" maxWidth="110" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">

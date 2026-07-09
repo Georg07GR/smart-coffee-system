@@ -8,12 +8,12 @@ package com.smartcoffee.logic;
 public enum KaffeeArt
 {
     ESPRESSO("Espresso", 1.50, false),
-    BLACK_COFFEE("Schwarzer Kaffee", 2.00, false),
-    CAPPUCCINO("Cappuccino", 2.00, true),
+    BLACK_COFFEE("Schwarzer Kaffee", 1.80, false),
+    CAPPUCCINO("Cappuccino", 2.50, true),
     LATE("Late", 2.50, true),
-    LATTE_MACCHIATO("Latte Macchiato", 2.50, true),
+    LATTE_MACCHIATO("Latte Macchiato", 2.80, true),
     COFFEE_WITH_MILK("Milch Kaffee", 2.00, true),
-    HOT_CHOCOLATE("Heiße Schokolade", 2.50, true);
+    HOT_CHOCOLATE("Heiße Schokolade", 2.20, true);
 
     /** The user-friendly text representation displayed on the UI. */
     private final String anzeigeName;
