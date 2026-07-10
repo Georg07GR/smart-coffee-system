@@ -30,7 +30,8 @@ import java.util.Map;
  * Connects UI elements, handles user inputs, manages coin inserts, calculates change,
  * persists transactions to SQLite, and updates the operator dashboard.
  */
-public class GUIController {
+public class GUIController
+{
 
     // --- FXML UI Controls ---
     @FXML private HBox mainContainer;
@@ -85,7 +86,8 @@ public class GUIController {
      * Initializes the controller. Called automatically after the FXML is loaded.
      */
     @FXML
-    public void initialize() {
+    public void initialize()
+    {
         // 1. Load branding logo image
         try {
             Image logo = new Image(getClass().getResourceAsStream("/com/smartcoffee/gui/bytesized_coffee_logo.png"));
@@ -102,11 +104,14 @@ public class GUIController {
         creditInCents = 0;
 
         // 3. Load persisted coin inventory from database on startup
-        try {
+        try
+        {
             Map<Muenze, Integer> dbStock = muenzwechsler.getMuenzBestand();
             dbManager.muenzbestandLaden(dbStock);
             logTerminal("SUCCESS: Persisted coin inventory successfully loaded from database.");
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             logTerminal("WARNING: Failed to load coin stock from database, using memory defaults. Info: " + e.getMessage());
         }
 
@@ -130,16 +135,20 @@ public class GUIController {
      * Toggles the visibility of the developer console panel on the right.
      */
     @FXML
-    private void onToggleTechnicianPanel(ActionEvent event) {
+    private void onToggleTechnicianPanel(ActionEvent event)
+    {
         isDeveloperPanelVisible = !isDeveloperPanelVisible;
         developerPanel.setVisible(isDeveloperPanelVisible);
         developerPanel.setManaged(isDeveloperPanelVisible);
         
         // Dynamically resize the stage width to fit the visible panels
         javafx.stage.Stage stage = (javafx.stage.Stage) customerPanel.getScene().getWindow();
-        if (isDeveloperPanelVisible) {
+        if (isDeveloperPanelVisible)
+        {
             stage.setWidth(1080); // Customer touchscreen (720) + Developer console (360)
-        } else {
+        }
+        else
+        {
             stage.setWidth(720);  // Customer touchscreen only
         }
         
@@ -150,7 +159,8 @@ public class GUIController {
      * Triggered when a coin simulation button is clicked.
      */
     @FXML
-    private void onCoinInserted(ActionEvent event) {
+    private void onCoinInserted(ActionEvent event)
+    {
         Button btn = (Button) event.getSource();
         String coinName = (String) btn.getUserData();
         Muenze coin = Muenze.valueOf(coinName);
@@ -169,8 +179,10 @@ public class GUIController {
      * Cancels the current payment transaction, refunding the inserted coins.
      */
     @FXML
-    private void onCancelPayment(ActionEvent event) {
-        if (eingeworfeneMuenzen.isEmpty()) {
+    private void onCancelPayment(ActionEvent event)
+    {
+        if (eingeworfeneMuenzen.isEmpty())
+        {
             statusLabel.setText("Kein Guthaben zum Abbrechen vorhanden.");
             return;
         }
@@ -190,7 +202,8 @@ public class GUIController {
      * Triggered when a drink card is clicked.
      */
     @FXML
-    private void onCoffeeSelected(ActionEvent event) {
+    private void onCoffeeSelected(ActionEvent event)
+    {
         // 1. Determine which coffee was selected based on the button clicked
         Button clickedBtn = (Button) event.getSource();
         KaffeeArt selectedCoffee;
@@ -203,7 +216,8 @@ public class GUIController {
         else return;
 
         // 2. Check if the machine is currently defective
-        if (kaffeeautomat.getStatus() == AutomatenStatus.DEFEKT) {
+        if (kaffeeautomat.getStatus() == AutomatenStatus.DEFEKT)
+        {
             statusLabel.setText("FEHLER: Maschine defekt! Wartung erforderlich.");
             logTerminal("Selection Blocked: Machine is in DEFEKT state.");
             return;
@@ -211,7 +225,8 @@ public class GUIController {
 
         // 3. Check if user has inserted enough credit
         int priceInCents = selectedCoffee.getPreisInCents();
-        if (creditInCents < priceInCents) {
+        if (creditInCents < priceInCents)
+        {
             statusLabel.setText(String.format("Guthaben unzureichend! Benötigt: %s", formatEuro(priceInCents)));
             logTerminal(String.format("Selection Blocked: %s costs %s (Credit: %s)", 
                         selectedCoffee.getAnzeigeName(), formatEuro(priceInCents), formatEuro(creditInCents)));
@@ -229,7 +244,8 @@ public class GUIController {
         logTerminal(String.format("Evaluating payment for %s...", selectedCoffee.getAnzeigeName()));
         WechselgeldErgebnis ergebnis = muenzwechsler.wechselgeldBerechnen(priceInCents, eingeworfeneMuenzen);
 
-        if (!ergebnis.erfolgreich()) {
+        if (!ergebnis.erfolgreich())
+        {
             // Rollback payment - refund inserted coins
             statusLabel.setText("FEHLER: Kein passendes Wechselgeld verfügbar!");
             logTerminal("Payment Blocked: Münzwechsler failed to calculate change. Transaction rolled back.");
@@ -244,7 +260,8 @@ public class GUIController {
     /**
      * Animates the coffee brewing process over 3 seconds without freezing the UI thread.
      */
-    private void animateBrewingProcess(KaffeeArt kaffee, WechselgeldErgebnis ergebnis) {
+    private void animateBrewingProcess(KaffeeArt kaffee, WechselgeldErgebnis ergebnis)
+    {
         // Disable UI buttons during brewing
         setControlsEnabled(false);
 
@@ -252,26 +269,30 @@ public class GUIController {
         liquidFill.setPrefHeight(0);
 
         Timeline brewingTimeline = new Timeline(
-            new KeyFrame(Duration.ZERO, e -> {
+            new KeyFrame(Duration.ZERO, e ->
+            {
                 brewingOverlay.setVisible(true);
                 brewingProgress.setProgress(0.1);
                 liquidFill.setPrefHeight(0); // Start empty
                 overlayStatusLabel.setText("Kaffeemühle mahlt Bohnen...");
                 logTerminal("Brewing: Grinding beans...");
             }),
-            new KeyFrame(Duration.seconds(1.0), e -> {
+            new KeyFrame(Duration.seconds(1.0), e ->
+            {
                 brewingProgress.setProgress(0.5);
                 liquidFill.setPrefHeight(20); // Cup 1/3 filled
                 overlayStatusLabel.setText("Erhitzen & Brühen läuft...");
                 logTerminal("Brewing: Heating water and brewing...");
             }),
-            new KeyFrame(Duration.seconds(2.0), e -> {
+            new KeyFrame(Duration.seconds(2.0), e ->
+            {
                 brewingProgress.setProgress(0.85);
                 liquidFill.setPrefHeight(45); // Cup 3/4 filled
                 overlayStatusLabel.setText(kaffee.isMitmilch() ? "Milch aufschäumen..." : "Getränk ausgeben...");
                 logTerminal("Brewing: Adding froth/dispensing...");
             }),
-            new KeyFrame(Duration.seconds(3.0), e -> {
+            new KeyFrame(Duration.seconds(3.0), e ->
+            {
                 brewingOverlay.setVisible(false);
                 setControlsEnabled(true);
                 liquidFill.setPrefHeight(55); // Cup fully filled at end
@@ -285,11 +306,13 @@ public class GUIController {
     /**
      * Finalizes the transaction, deducts ingredients, updates database records and GUI elements.
      */
-    private void finalizeTransaction(KaffeeArt kaffee, WechselgeldErgebnis ergebnis) {
+    private void finalizeTransaction(KaffeeArt kaffee, WechselgeldErgebnis ergebnis)
+    {
         // 1. Deduct ingredients from coffee machine stock
         boolean brewSuccess = kaffeeautomat.getraenkZubereiten(kaffee);
 
-        if (!brewSuccess) {
+        if (!brewSuccess)
+        {
             // Grinder defect triggered!
             statusLabel.setText("ALARM: Mahlwerk beschädigt! Gerät blockiert.");
             logTerminal("ALARM: Grinder broke down during preparation! Machine is now DEFEKT.");
@@ -298,16 +321,19 @@ public class GUIController {
         }
 
         // 2. Transaction succeeded! Save order and payments to database
-        try {
+        try
+        {
             // Write order
             int orderId = dbManager.bestellungSpeichern(kaffee);
             
             // Map payment coins to group count and insert payment
             Map<Muenze, Integer> paymentCounts = new HashMap<>();
-            for (Muenze coin : eingeworfeneMuenzen) {
+            for (Muenze coin : eingeworfeneMuenzen)
+            {
                 paymentCounts.put(coin, paymentCounts.getOrDefault(coin, 0) + 1);
             }
-            for (Map.Entry<Muenze, Integer> entry : paymentCounts.entrySet()) {
+            for (Map.Entry<Muenze, Integer> entry : paymentCounts.entrySet())
+            {
                 dbManager.zahlungSpeichern(orderId, entry.getKey(), entry.getValue());
             }
 
@@ -338,7 +364,8 @@ public class GUIController {
      * Operator refill event.
      */
     @FXML
-    private void onRefill(ActionEvent event) {
+    private void onRefill(ActionEvent event)
+    {
         kaffeeautomat.auffuellen();
         updateResourceGauges();
         statusLabel.setText("Maschine wurde aufgefüllt und gereinigt.");
@@ -349,8 +376,10 @@ public class GUIController {
      * Operator repair grinder event.
      */
     @FXML
-    private void onRepairGrinder(ActionEvent event) {
-        if (kaffeeautomat.getStatus() != AutomatenStatus.DEFEKT) {
+    private void onRepairGrinder(ActionEvent event)
+    {
+        if (kaffeeautomat.getStatus() != AutomatenStatus.DEFEKT)
+        {
             logTerminal("OPERATOR ACTION: Repair skipped (Machine is already functional).");
             return;
         }
@@ -366,7 +395,8 @@ public class GUIController {
     /**
      * Dry-run resources check.
      */
-    private boolean checkResourcesSufficient(KaffeeArt kaffee) {
+    private boolean checkResourcesSufficient(KaffeeArt kaffee)
+    {
         if (kaffeeautomat.getKaffeeBestand() < 25) return false;
         if (kaffee.isMitmilch() && kaffeeautomat.getMilchBestand() < 10) return false;
         if (kaffee == KaffeeArt.HOT_CHOCOLATE && kaffeeautomat.getCacaoBestand() < 15) return false;
@@ -376,7 +406,8 @@ public class GUIController {
     /**
      * Sets buttons enabled/disabled to block input during brewing animations.
      */
-    private void setControlsEnabled(boolean enabled) {
+    private void setControlsEnabled(boolean enabled)
+    {
         espressoBtn.setDisable(!enabled);
         blackCoffeeBtn.setDisable(!enabled);
         cappuccinoBtn.setDisable(!enabled);
@@ -390,7 +421,8 @@ public class GUIController {
     /**
      * Updates the heights of the resource liquid cylinders in FXML based on current values.
      */
-    private void updateResourceGauges() {
+    private void updateResourceGauges()
+    {
         int coffee = kaffeeautomat.getKaffeeBestand();
         int milk = kaffeeautomat.getMilchBestand();
         int cacao = kaffeeautomat.getCacaoBestand();
@@ -410,10 +442,14 @@ public class GUIController {
         setResourceLowAlert(cacaoFill, cacao < 15);
     }
 
-    private void setResourceLowAlert(Region element, boolean isLow) {
-        if (isLow) {
+    private void setResourceLowAlert(Region element, boolean isLow)
+    {
+        if (isLow)
+        {
             element.setStyle("-fx-border-color: #ff453a; -fx-border-width: 1.5; -fx-border-radius: 10;");
-        } else {
+        }
+        else
+        {
             element.setStyle("");
         }
     }
@@ -421,20 +457,23 @@ public class GUIController {
     /**
      * Updates coin stock summaries and total cash in changer representation.
      */
-    private void updateChangerStats() {
+    private void updateChangerStats()
+    {
         Map<Muenze, Integer> stock = muenzwechsler.getMuenzBestand();
         int sumCents = 0;
         StringBuilder breakdown = new StringBuilder();
 
         // 1. Calculate sum including all coins
-        for (Muenze m : Muenze.values()) {
+        for (Muenze m : Muenze.values())
+        {
             int count = stock.getOrDefault(m, 0);
             sumCents += count * m.getWertInCents();
         }
 
         // 2. Format list vertically in descending order, skipping 1c, 2c, 5c
         Muenze[] coins = Muenze.values();
-        for (int i = coins.length - 1; i >= 0; i--) {
+        for (int i = coins.length - 1; i >= 0; i--)
+        {
             Muenze m = coins[i];
             if (m.getWertInCents() < 10) continue; // Skip very small coins to fit UI elegantly
             int count = stock.getOrDefault(m, 0);
@@ -442,7 +481,8 @@ public class GUIController {
         }
 
         // Remove trailing newline
-        if (breakdown.length() > 0) {
+        if (breakdown.length() > 0)
+        {
             breakdown.setLength(breakdown.length() - 1);
         }
 
@@ -453,10 +493,12 @@ public class GUIController {
     /**
      * Loads total orders count and revenue directly from SQLite database and displays them.
      */
-    private void updateDatabaseStats() {
+    private void updateDatabaseStats()
+    {
         tassenLabel.setText(kaffeeautomat.getTassen() + " Tassen");
         
-        try {
+        try
+        {
             // Load stats directly from database tables
             double revenue = dbManager.getGesamtumsatz();
             revenueLabel.setText(String.format("%.2f €", revenue));
@@ -468,20 +510,24 @@ public class GUIController {
     /**
      * Logs a message into the operators console terminal with a timestamp.
      */
-    private void logTerminal(String message) {
+    private void logTerminal(String message)
+    {
         LocalDateTime now = LocalDateTime.now();
         String timestamp = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         terminalLog.appendText("[" + timestamp + "] " + message + "\n");
     }
 
-    private String formatEuro(int cents) {
+    private String formatEuro(int cents)
+    {
         return String.format("%.2f €", cents / 100.0);
     }
 
-    private String formatCoinsList(List<Muenze> coins) {
+    private String formatCoinsList(List<Muenze> coins)
+    {
         if (coins.isEmpty()) return "keines";
         StringBuilder sb = new StringBuilder();
-        for (Muenze m : coins) {
+        for (Muenze m : coins)
+        {
             sb.append(m.getAnzeigeName()).append(", ");
         }
         sb.setLength(sb.length() - 2);
